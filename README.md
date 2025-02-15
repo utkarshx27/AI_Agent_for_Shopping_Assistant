@@ -1,1 +1,1 @@
-# virtual_shopping_assistant
+# Virtual Shopping Assistant
