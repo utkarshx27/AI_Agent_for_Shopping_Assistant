@@ -143,4 +143,12 @@ client.beta.threads.runs.submit_tool_outputs(
 ```
 
 -	The assistant then generates a final response based on the integrated tool outputs and sends it to the user.
+---
+## Challenges & Improvements:
+- **API Limits & Latency:** OpenAI API calls have rate limits affecting response speed. But in a same way we can use any open source model with Langchain.
+- **Use Web Crawling** For Competitor Price Comparison, we can use web web crawler.
+- **Use Small Model (Fine Tuned)** We can finetune any smaller model because it is a domain-specific task, potentially reducing computational costs.
 
+##  Open Questions & References:
+- https://platform.openai.com/docs/api-reference/assistants
+- https://platform.openai.com/docs/guides/function-calling
