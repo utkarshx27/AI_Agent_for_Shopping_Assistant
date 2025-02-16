@@ -1,16 +1,13 @@
-# Import Libraries
 import pandas as pd
 from datetime import datetime, timedelta
 
 
-# Access the data files
+
 inventory_info = pd.read_csv(r"C:\Users\utkar\Downloads\agentic_ai\virtual_shopping_assistant\inventory_info.csv")
 shipping_info = pd.read_csv(r"C:\Users\utkar\Downloads\agentic_ai\virtual_shopping_assistant\shipping_info.csv")
 competitor_prices_info = pd.read_csv(r"C:\Users\utkar\Downloads\agentic_ai\virtual_shopping_assistant\competitor_prices_info.csv")
 return_policies_info = pd.read_csv(r"C:\Users\utkar\Downloads\agentic_ai\virtual_shopping_assistant\return_policies_info.csv")
 
-
-# Define the tools
 
 def search_products(df, name=None, color=None, min_price=None, max_price=None, size=None, brand=None):
     '''Search for products in the inventory based on filters like name, color, price range, size, and brand.'''
@@ -75,7 +72,6 @@ def search_products(df, name=None, color=None, min_price=None, max_price=None, s
     
     except Exception as e:
         return {"error": str(e)}
-
 
 
 # Let's assume our warehouse is in Bangalore. We will calculate the estimated delivery date based on the shipping days to the given city + doorstep delivery time.
@@ -205,93 +201,93 @@ def return_policy_checker(df, store_name):
     }
 
 
-# def discount_checker(df, product_id):
-#     try:
-#         if not isinstance(df, pd.DataFrame):
-#             raise ValueError("The input data must be a pandas DataFrame.")
+def discount_checker(df, product_id):
+    try:
+        if not isinstance(df, pd.DataFrame):
+            raise ValueError("The input data must be a pandas DataFrame.")
         
-#         required_columns = {"product_id", "discount_available", "discounted_price", "discount_percentage", "discounted_coupon"}
-#         missing_columns = required_columns - set(df.columns)
-#         if missing_columns:
-#             raise ValueError(f"Missing required columns in DataFrame: {missing_columns}")
+        required_columns = {"product_id", "discount_available", "discounted_price", "discount_percentage", "discounted_coupon"}
+        missing_columns = required_columns - set(df.columns)
+        if missing_columns:
+            raise ValueError(f"Missing required columns in DataFrame: {missing_columns}")
         
-#         if not isinstance(product_id, (int, str)):
-#             raise TypeError("Product ID must be an integer or string.")
+        if not isinstance(product_id, (int, str)):
+            raise TypeError("Product ID must be an integer or string.")
         
-#         product_info = df[df["product_id"] == product_id]
+        product_info = df[df["product_id"] == product_id]
         
-#         if product_info.empty:
-#             return {"error": "Product not found"}
+        if product_info.empty:
+            return {"error": "Product not found"}
         
-#         product_info = product_info.iloc[0]  # Extract row as a Series
+        product_info = product_info.iloc[0]  # Extract row as a Series
         
-#         if not isinstance(product_info["discount_available"], str):
-#             raise ValueError("discount_available must be a string.")
+        if not isinstance(product_info["discount_available"], str):
+            raise ValueError("discount_available must be a string.")
         
-#         if product_info["discount_available"].lower() == "yes":
-#             return {
-#                 "discount_status": True,
-#                 "discounted_price": float(product_info["discounted_price"]),
-#                 "discount_percentage": float(product_info["discount_percentage"]),
-#                 "discounted_coupon": product_info["discounted_coupon"],
-#             }
-#         else:
-#             return {"discount_status": False}
+        if product_info["discount_available"].lower() == "yes":
+            return {
+                "discount_status": True,
+                "discounted_price": float(product_info["discounted_price"]),
+                "discount_percentage": float(product_info["discount_percentage"]),
+                "discounted_coupon": product_info["discounted_coupon"],
+            }
+        else:
+            return {"discount_status": False}
     
-#     except Exception as e:
-#         return {"error": str(e)}
+    except Exception as e:
+        return {"error": str(e)}
 
 
-# def price_comparison(df, product_name):
-#     try:
-#         if not isinstance(df, pd.DataFrame):
-#             raise ValueError("The input data must be a pandas DataFrame.")
+def price_comparison(df, product_name):
+    try:
+        if not isinstance(df, pd.DataFrame):
+            raise ValueError("The input data must be a pandas DataFrame.")
         
-#         required_columns = {"product_name", "store", "price", "discount_available", "discounted_price"}
-#         missing_columns = required_columns - set(df.columns)
-#         if missing_columns:
-#             raise ValueError(f"Missing required columns in DataFrame: {missing_columns}")
+        required_columns = {"product_name", "store", "price", "discount_available", "discounted_price"}
+        missing_columns = required_columns - set(df.columns)
+        if missing_columns:
+            raise ValueError(f"Missing required columns in DataFrame: {missing_columns}")
         
-#         if not isinstance(product_name, str):
-#             raise TypeError("Product name must be a string.")
+        if not isinstance(product_name, str):
+            raise TypeError("Product name must be a string.")
         
-#         product_prices = df[df["product_name"].str.lower() == product_name.lower()]
+        product_prices = df[df["product_name"].str.lower() == product_name.lower()]
         
-#         if product_prices.empty:
-#             return {"error": "Product not found in competitor stores"}
+        if product_prices.empty:
+            return {"error": "Product not found in competitor stores"}
         
-#         return product_prices[["store", "price", "discount_available", "discounted_price"]].to_dict(orient="records")
+        return product_prices[["store", "price", "discount_available", "discounted_price"]].to_dict(orient="records")
     
-#     except Exception as e:
-#         return {"error": str(e)}
+    except Exception as e:
+        return {"error": str(e)}
 
 
-# def return_policy_checker(df, store_name):
-#     try:
-#         if not isinstance(df, pd.DataFrame):
-#             raise ValueError("The input data must be a pandas DataFrame.")
+def return_policy_checker(df, store_name):
+    try:
+        if not isinstance(df, pd.DataFrame):
+            raise ValueError("The input data must be a pandas DataFrame.")
         
-#         required_columns = {"store", "return_period", "return_conditions", "refund_method"}
-#         missing_columns = required_columns - set(df.columns)
-#         if missing_columns:
-#             raise ValueError(f"Missing required columns in DataFrame: {missing_columns}")
+        required_columns = {"store", "return_period", "return_conditions", "refund_method"}
+        missing_columns = required_columns - set(df.columns)
+        if missing_columns:
+            raise ValueError(f"Missing required columns in DataFrame: {missing_columns}")
         
-#         if not isinstance(store_name, str):
-#             raise TypeError("Store name must be a string.")
+        if not isinstance(store_name, str):
+            raise TypeError("Store name must be a string.")
         
-#         policy_info = df[df["store"].str.lower() == store_name.lower()]
+        policy_info = df[df["store"].str.lower() == store_name.lower()]
         
-#         if policy_info.empty:
-#             return {"error": "Return policy not found for this store"}
+        if policy_info.empty:
+            return {"error": "Return policy not found for this store"}
         
-#         policy_info = policy_info.iloc[0]
+        policy_info = policy_info.iloc[0]
         
-#         return {
-#             "store": policy_info["store"],
-#             "return_period": policy_info["return_period"],
-#             "return_conditions": policy_info["return_conditions"],
-#             "refund_method": policy_info["refund_method"]
-#         }
+        return {
+            "store": policy_info["store"],
+            "return_period": policy_info["return_period"],
+            "return_conditions": policy_info["return_conditions"],
+            "refund_method": policy_info["refund_method"]
+        }
     
-#     except Exception as e:
-#         return {"error": str(e)}
+    except Exception as e:
+        return {"error": str(e)}
