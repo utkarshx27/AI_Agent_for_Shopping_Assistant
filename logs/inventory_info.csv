@@ -1,6 +1,0 @@
-product_id,name,color,price,size,type,brand,discount_available,discounted_price,discount_percentage,discounted_coupon,store
-0,floral skirt,orange,30,s,skirt,acb,yes,27,10,SAVE10,SiteA
-1,socks,white,4.99,m,accessories,xyz,no,0,0,null,SiteA
-2,sneakers,white,60,8,shoes,Nike,no,0,0,null,SiteB
-3,casual denim jacket,navy blue,80,l,jacket,Roadster,no,0,0,null,SiteB
-4,cocktail dress,red,50,m,cocktail dress,xyz,no,0,0,null,SiteB
