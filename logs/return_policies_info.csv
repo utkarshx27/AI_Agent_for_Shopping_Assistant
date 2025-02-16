@@ -1,7 +1,0 @@
-store,return_period,return_conditions,refund_method
-Amazon,30 days,Items must be in original condition with tags.,Original payment method
-Flipkart,10 days,Only defective/damaged products are returnable,Store credit or refund
-Myntra,15 days,No returns on discounted items,Store credit only
-SiteA,10 days,Items must be in original condition with tags,Original payment method
-SiteB,10 days,Only defective/damaged products are returnable,Store credit or refund
-aJio,5 days,No returns on discounted items,Store credit only
