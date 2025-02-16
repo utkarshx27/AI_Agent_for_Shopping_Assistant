@@ -148,6 +148,9 @@ client.beta.threads.runs.submit_tool_outputs(
 - **API Limits & Latency:** OpenAI API calls have rate limits affecting response speed. But in a same way we can use any open source model with Langchain.
 - **Use Web Crawling** For Competitor Price Comparison, we can use web web crawler.
 - **Use Small Model (Fine Tuned)** We can finetune any smaller model because it is a domain-specific task, potentially reducing computational costs.
+- **Voice Assistant** We can explore text to speech models, so that user can use voice commands.
+- **Reviews Summary** Provide summary of reviews and rating.
+- **Visual Search** Using Computer Vision we can implement a visual search to find similer items.
 
 ##  Open Questions & References:
 - https://platform.openai.com/docs/api-reference/assistants
