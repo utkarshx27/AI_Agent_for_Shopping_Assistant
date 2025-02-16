@@ -64,5 +64,83 @@ The agent dynamically selects and combines tools based on the user's query. For 
 3.	Integrate the results and present them to the user.
 This modular approach ensures flexibility and scalability, allowing new tools to be added easily in the future.
 
+### Tools Module (tools.py)
+1.	E-Commerce Search Aggregator
+**Purpose:** Search for products in the inventory based on user-specified filters like name, color, price range, size, and brand.
+**Implementation:**
+-	The function search_products takes a DataFrame (df) and optional filters (name, color, min_price, max_price, size, brand).
+-	It validates the input DataFrame and filters, then applies the filters to the DataFrame.
+-	The results are returned as a list of dictionaries, where each dictionary represents a product matching the criteria.
 
+2.	Shipping Time Estimator
+**Purpose:** Estimate the shipping cost and delivery date for a given city and desired delivery date.
+
+**Implementation:**
+-	The function estimate_shipping takes a DataFrame (df), a city, and a desired delivery date.
+-	It calculates the estimated delivery date based on the shipping days from the warehouse to the city and adds a fixed doorstep delivery time.
+-	It checks if the desired delivery date is feasible and returns the shipping cost and estimated delivery date.
+
+3.	Discount / Promo Checker
+**Purpose:** Check if a discount is available for a specific product and provide details like discounted price and coupon code.
+
+**Implementation:**
+-	The function discount_checker takes a DataFrame (df) and a product ID.
+-	It checks if the product has a discount and returns the discounted price, discount percentage, and coupon code if available.
+  
+4.	Competitor Price Comparison
+**Purpose:** Compare prices of a specific product across different competitor stores.
+
+**Implementation:**
+-	The function price_comparison takes a DataFrame (df) and a product name.
+-	It searches for the product in the competitor prices DataFrame and returns a list of stores with their prices and discount details.
+  
+5.	Return Policy Checker
+**Purpose:** Provide details of the return policy for a specific store.
+
+**Implementation:**
+-	The function return_policy_checker takes a DataFrame (df) and a store name.
+-	It retrieves the return policy details (return period, conditions, and refund method) for the specified store.
+
+### Agent Script (agent.py)
+I have used Open AI Assistant ([OpenAI Assistants API Documentation](https://platform.openai.com/docs/api-reference/assistants)). This assistant can call models and use tools to perform tasks. Model: gpt-4o.
+#### Prompt Template:
+-	**Prompt 1:** You are a helpful online shopping assistant. Use the provided tools to answer user queries. Always ask for necessary information like the delivery city before making any assumptions. Avoid answering question that are not related to online shopping.
+- **Prompt 2:** Always stay on the topic of online shopping and use the tools provided to assist the user. Ask for necessary information before making any assumptions.
+-	User queries are passed to the assistant via the client.beta.threads.messages.create method.
+-	The assistant processes these queries and determines which tools to invoke.
+#### Parsing Logic:
+-	The parsing logic is responsible for interpreting the user's query, identifying the required tools, and extracting the necessary parameters for those tools.
+-	The OpenAI Assistant uses the tools_list to determine which tools are available and their respective parameters.
+-	When the assistant detects that a tool needs to be invoked (based on the user's query), it triggers the requires_action status.
+-	The required actions are extracted from the run_status object:
+```
+required_actions = run_status.required_action.submit_tool_outputs.model_dump()
+```
+
+-	For each tool call, the assistant extracts:
+  -	The function name (e.g., search_products, estimate_shipping).
+  -	The arguments (e.g., city, desired_date, product_name).
+#### Integration of Tool Outputs: 
+-	Once the tools are invoked and their outputs are generated, the assistant integrates these outputs into a coherent response for the user.
+-	The assistant retrieves the tool outputs and formats them into a response.
+-	The tools_output list is populated with the results of each tool call:
+```
+tools_output.append({
+    "tool_call_id": action["id"],
+    "output": output
+})
+
+```
+
+•	The assistant submits these outputs back to the OpenAI API:
+```
+client.beta.threads.runs.submit_tool_outputs(
+    thread_id=thread.id,
+    run_id=run.id,
+    tool_outputs=tools_output
+)
+
+```
+
+-	The assistant then generates a final response based on the integrated tool outputs and sends it to the user.
 
