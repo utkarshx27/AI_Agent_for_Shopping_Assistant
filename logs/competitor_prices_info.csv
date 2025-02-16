@@ -1,8 +1,0 @@
-product_id,product_name,store,price,discount_available,discount_percentage,discounted_price
-0,floral skirt,Amazon,38.99,yes,5,35.99
-0,floral skirt,Flipkart,20.0,yes,5,18.99
-1,socks,Amazon,3.1,no,0,3.1
-1,socks,Myntra,2.8,yes,50,1.4
-3,casual denim jacket,aJio,60.0,no,0,60.0
-3,casual denim jacket,TheSouledStore,80.0,yes,10,72.0
-3,casual denim jacket,Myntra,65.0,yes,20,52.0
