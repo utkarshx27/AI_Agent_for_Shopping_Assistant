@@ -1,3 +1,0 @@
-Step 1. Change the dataframe directory path.
-step 2. Open terminal and run command: python agnetv2.py
-step 3. Ask question and to stop program type "bye" in chat.
