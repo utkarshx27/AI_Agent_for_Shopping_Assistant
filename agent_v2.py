@@ -12,10 +12,9 @@ from tools import inventory_info, shipping_info, competitor_prices_info, return_
 import time
 from colorama import Fore, Style, init
 
-
 init()
 
-def print_slow(text, color=Fore.LIGHTCYAN_EX, delay=0.02):
+def print_slow(text,color=Fore.LIGHTCYAN_EX, delay=0.02):
     """Simulate typing effect for the chatbot's response."""
     sys.stdout.write(color)
     for char in text:
@@ -24,19 +23,16 @@ def print_slow(text, color=Fore.LIGHTCYAN_EX, delay=0.02):
         time.sleep(delay)
     sys.stdout.write(Style.RESET_ALL + "\n")
 
-# Disable logging
 logging.basicConfig(level=logging.CRITICAL)
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-model = "gpt-4o"
+client= OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+model= "gpt-4o"
 
-today = datetime.now()
-date_context = f"Today is {today.strftime('%A, %B %d, %Y')}."
+today= datetime.now()
+date_context= f"Today is {today.strftime('%A, %B %d, %Y')}."
 
-# Define the tools
-tools_list = [
-    {   
-        "type": "function",
+tools_list= [
+    {   "type": "function",
         "function": {
             "name": "search_products",
             "description": "Search for products in the inventory based on filters like item name, color, price range, size, and brand.",
@@ -113,7 +109,7 @@ tools_list = [
     },
 ]
 
-client = OpenAI()
+client= OpenAI()
 
 try:
     assistant = client.beta.assistants.create(
